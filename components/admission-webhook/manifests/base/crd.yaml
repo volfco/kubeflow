@@ -722,6 +722,23 @@ spec:
                 additionalProperties:
                   type: string
                 type: object
+              resources:
+                properties:
+                  limits:
+                    additionalProperties:
+                      anyOf:
+                        - type: string
+                        - type: integer
+                      x-kubernetes-int-or-string: true
+                    type: object
+                  requests:
+                    additionalProperties:
+                      anyOf:
+                        - type: string
+                        - type: integer
+                      x-kubernetes-int-or-string: true
+                    type: object
+                type: object
               selector:
                 properties:
                   matchExpressions:

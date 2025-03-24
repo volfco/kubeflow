@@ -212,6 +212,43 @@ func mergeImagePullSecrets(
 	return merged, err
 }
 
+func mergeResources(resources corev1.ResourceRequirements, podDefaults []*settingsapi.PodDefault) corev1.ResourceRequirements {
+	if resources.Limits == nil {
+		resources.Limits = make(corev1.ResourceList)
+	}
+	if resources.Requests == nil {
+		resources.Requests = make(corev1.ResourceList)
+	}
+	for _, pd := range podDefaults {
+		for k, v := range pd.Spec.Resources.Limits {
+			// if the resource already exists, check to see if the default is greater. if so, update it to the default value
+			if _, ok := resources.Limits[k]; ok {
+				if v.Cmp(resources.Limits[k]) == -1 {
+					resources.Limits[k] = v
+				} else {
+					continue
+				}
+			} else {
+				resources.Limits[k] = v
+			}
+		}
+		for k, v := range pd.Spec.Resources.Requests {
+			// if the resource already exists, check to see if the default is greater. if so, update it to the default value
+			if _, ok := resources.Limits[k]; ok {
+				if v.Cmp(resources.Limits[k]) == -1 {
+					resources.Limits[k] = v
+				} else {
+					continue
+				}
+			} else {
+				resources.Limits[k] = v
+			}
+		}
+	}
+
+	return resources
+}
+
 // mergeEnv merges a list of env vars with the env vars injected by given list podDefaults.
 // It returns an error if it detects any conflict during the merge.
 func mergeEnv(envVars []corev1.EnvVar, podDefaults []*settingsapi.PodDefault) ([]corev1.EnvVar, error) {
@@ -563,6 +600,8 @@ func applyPodDefaultsOnContainer(ctr *corev1.Container, podDefaults []*settingsa
 
 	ctr.Env = envVars
 
+	ctr.Resources = mergeResources(ctr.Resources, podDefaults)
+
 	volumeMounts, err := mergeVolumeMounts(ctr.VolumeMounts, podDefaults)
 	if err != nil {
 		klog.Error(err)
@@ -577,7 +616,7 @@ func applyPodDefaultsOnContainer(ctr *corev1.Container, podDefaults []*settingsa
 	setCommandAndArgs(ctr, podDefaults)
 }
 
-//setCommandAndArgs adds command and args to the provided container. If the container already has a command or arguments set,
+// setCommandAndArgs adds command and args to the provided container. If the container already has a command or arguments set,
 // they won't be overwritten by PodDefault.
 func setCommandAndArgs(ctr *corev1.Container, podDefaults []*settingsapi.PodDefault) {
 	// ignore istio sidecar container

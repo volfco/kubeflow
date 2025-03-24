@@ -62,6 +62,10 @@ type PodDefaultSpec struct {
 	// +optional
 	EnvFrom []v1.EnvFromSource `json:"envFrom,omitempty"`
 
+	// Resources defines the collection of ResourceRequirements to inject into containers.
+	// +optional
+	Resources v1.ResourceRequirements `json:"resources,omitempty"`
+
 	// Volumes defines the collection of Volume to inject into the pod.
 	// +optional
 	Volumes []v1.Volume `json:"volumes,omitempty"`
