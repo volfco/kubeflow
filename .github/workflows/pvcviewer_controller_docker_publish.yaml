@@ -10,7 +10,7 @@ on:
       - releasing/version/VERSION
 
 env:
-  IMG: ghcr.io/kubeflow/kubeflow/pvcviewer-controller
+  IMG: ghcr.io/volfco/kubeflow/pvcviewer-controller
   ARCH: linux/amd64,linux/ppc64le,linux/arm64/v8
 
 jobs:

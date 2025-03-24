@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  IMG: ghcr.io/kubeflow/kubeflow/pvcviewer-controller
+  IMG: ghcr.io/volfco/kubeflow/pvcviewer-controller
   TAG: integration-test
 
 jobs:

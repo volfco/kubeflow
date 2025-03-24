@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  IMG: ghcr.io/kubeflow/kubeflow/tensorboard-controller
+  IMG: ghcr.io/volfco/kubeflow/tensorboard-controller
 
 jobs:
   build:

@@ -10,7 +10,7 @@ on:
       - releasing/version/VERSION
 
 env:
-  IMG: ghcr.io/kubeflow/kubeflow/tensorboards-web-app
+  IMG: ghcr.io/volfco/kubeflow/tensorboards-web-app
   ARCH: linux/amd64,linux/ppc64le,linux/arm64/v8
 
 jobs:

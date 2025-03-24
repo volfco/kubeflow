@@ -10,7 +10,7 @@ on:
       - releasing/version/VERSION
 
 env:
-  IMG: ghcr.io/kubeflow/kubeflow/volumes-web-app
+  IMG: ghcr.io/volfco/kubeflow/volumes-web-app
   ARCH: linux/amd64,linux/ppc64le,linux/arm64/v8
 
 jobs:

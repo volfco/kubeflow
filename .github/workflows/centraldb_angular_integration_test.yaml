@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  IMG: ghcr.io/kubeflow/kubeflow/centraldashboard-angular
+  IMG: ghcr.io/volfco/kubeflow/centraldashboard-angular
   TAG: integration-test
 
 jobs:

@@ -9,7 +9,7 @@ on:
       - releasing/version/VERSION
 
 env:
-  IMG: ghcr.io/kubeflow/kubeflow/profile-controller
+  IMG: ghcr.io/volfco/kubeflow/profile-controller
   ARCH: linux/amd64,linux/ppc64le,linux/arm64/v8
 
 jobs:

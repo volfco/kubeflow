@@ -9,7 +9,7 @@ on:
       - releasing/version/VERSION
 
 env:
-  IMG: ghcr.io/kubeflow/kubeflow/poddefaults-webhook
+  IMG: ghcr.io/volfco/kubeflow/poddefaults-webhook
   ARCH: linux/amd64,linux/ppc64le,linux/arm64/v8
 
 jobs:

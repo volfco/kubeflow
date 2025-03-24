@@ -14,8 +14,8 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  PROFILE_IMG: ghcr.io/kubeflow/kubeflow/profile-controller
-  KFAM_IMG: ghcr.io/kubeflow/kubeflow/kfam
+  PROFILE_IMG: ghcr.io/volfco/kubeflow/profile-controller
+  KFAM_IMG: ghcr.io/volfco/kubeflow/kfam
   TAG: integration-test
 
 jobs:
