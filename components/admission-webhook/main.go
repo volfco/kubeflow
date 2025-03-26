@@ -752,6 +752,8 @@ func serve(w http.ResponseWriter, r *http.Request, admit admitFunc) {
 		}
 	}
 
+	fmt.Println("got request:", string(body))
+
 	// verify the content type is accurate
 	contentType := r.Header.Get("Content-Type")
 	if contentType != "application/json" {
