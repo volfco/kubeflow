@@ -766,6 +766,8 @@ func serve(w http.ResponseWriter, r *http.Request, admit admitFunc) {
 		klog.Error(err)
 		reviewResponse = toAdmissionResponse(err)
 	} else {
+		klog.Info(fmt.Sprintf("AdmissionReview for Kind=%v, Namespace=%v Name=%v (%v) UID=%v patchOperation=%v UserInfo=%v",
+			ar.Request.Kind, ar.Request.Namespace, ar.Request.Name, ar.Request.Resource, ar.Request.UID, ar.Request.Operation, ar.Request.UserInfo))
 		reviewResponse = admit(ar)
 	}
 
@@ -799,7 +801,8 @@ func main() {
 	flag.IntVar(&port, "webhookPort", 4443, "Port number on which the webhook listens.")
 	flag.Parse()
 	klog.InitFlags(nil)
-	ctrl.SetLogger(zap.New())
+
+	ctrl.SetLogger(zap.New(zap.UseDevMode(true)))
 
 	http.HandleFunc("/apply-poddefault", serveMutatePods)
 
