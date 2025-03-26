@@ -804,6 +804,8 @@ func main() {
 
 	ctrl.SetLogger(zap.New(zap.UseDevMode(true)))
 
+	fmt.Println("yo")
+
 	http.HandleFunc("/apply-poddefault", serveMutatePods)
 
 	server := &http.Server{
