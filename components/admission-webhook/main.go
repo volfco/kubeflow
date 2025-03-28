@@ -213,6 +213,7 @@ func mergeImagePullSecrets(
 }
 
 func mergeResources(resources corev1.ResourceRequirements, podDefaults []*settingsapi.PodDefault) corev1.ResourceRequirements {
+	klog.Infof("merging resources: %v", resources)
 	if resources.Limits == nil {
 		resources.Limits = make(corev1.ResourceList)
 	}
@@ -245,7 +246,7 @@ func mergeResources(resources corev1.ResourceRequirements, podDefaults []*settin
 			}
 		}
 	}
-
+	klog.Infof("merged resources: %v", resources)
 	return resources
 }
 
